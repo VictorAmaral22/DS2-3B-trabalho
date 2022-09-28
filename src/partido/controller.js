@@ -55,8 +55,9 @@ class PartidoController {
     async update(req, res) {
         try {
             const {id} = req.params;
-            await Partido.update(req.body, {where: {
-                    id
+            const { name, logo } = req.body
+            await Partido.update({ name, logo }, {where: {
+                    numero: id
                 }});
             return res
                 .status(200)
@@ -72,7 +73,7 @@ class PartidoController {
         try {
             const {id} = req.params;
             await Partido.destroy({where: {
-                    id
+                    numero: id
                 }});
             res
                 .status(200)

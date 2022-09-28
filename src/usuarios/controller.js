@@ -63,9 +63,18 @@ class UsuariosController {
     async list(req, res) {
         try {
             const users = await Usuario.findAndCountAll();
+            const formatedArr = users.rows.map(item => {
+                return {
+                    id: item.id,
+                    email: item.email,
+                    name: item.name,
+                    createdAt: item.createdAt,
+                    updatedAt: item.updatedAt,
+                }
+            })
             res
                 .status(200)
-                .json(users);
+                .json(formatedArr);
         } catch (error) {
             res
                 .status(400)
@@ -114,7 +123,7 @@ class UsuariosController {
             if (password) {
                 const salt = await genSalt(8)
                 const hashedpass = await hash(senha, salt)
-                updateObj.password= hashedpass
+                updateObj.password = hashedpass
             }
             let response = await Usuario.update(updateObj, {where: {
                     id
