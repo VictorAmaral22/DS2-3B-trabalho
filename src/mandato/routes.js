@@ -5,7 +5,7 @@ const router = Router();
 const MandatoController = require('./controller');
 const controller = new MandatoController();
 
-router.post('/', isAuth, (req, res) => controller.create(req, res));
+router.post('/', (req, res) => controller.create(req, res));
 
 router.get('/', (req, res) => controller.list(req, res));
 router.put('/:id', isAuth, (req, res) => controller.update(req, res));
