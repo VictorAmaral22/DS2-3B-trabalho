@@ -64,6 +64,8 @@
 
   * GET     /politico/:id/historico 
   
+  **Need Token in headers:{authorization:token}**
+  
   * PUT     /politico 
   
         {
@@ -78,7 +80,9 @@
           id_partido: integer?,
           mandatoAtual: integer?
         }
-  
+
+  **Need Token in headers:{authorization:token}**
+
   * DELETE  /politico 
   
         {
@@ -105,7 +109,8 @@
 
   * GET     /partido/:id/integrantes
   
-  
+  **Need Token in headers:{authorization:token}**
+
   * PUT     /partido/:id 
  
         {
@@ -113,7 +118,9 @@
           name:string?,
           logo:string?
         }
-  
+
+  **Need Token in headers:{authorization:token}**
+
   * DELETE  /partido 
   
         {
@@ -142,7 +149,8 @@
   
   * GET     /mandato/:id
   
-   
+  **Need Token in headers:{authorization:token}**
+
   * PUT     /mandato/:id 
  
         {
@@ -155,6 +163,8 @@
           inicio:date?,
           final:date?
         }
+    
+  **Need Token in headers:{authorization:token}**
   
   * DELETE  /mandato 
   
@@ -165,6 +175,7 @@
 
 ## How to run
 * Install Dependencies
+
         npm install
 * Run test
 
