@@ -8,7 +8,6 @@ class PoliticoController {
 
     async create(req, res) {
 		try {
-			// INPUT
 			const {
 				cpf,
 				name,
@@ -22,7 +21,12 @@ class PoliticoController {
 				mandatoAtual
 			} = req.body;
 
-			// PROCESSAMENTO
+			let partido = await Partido.findByPk(id_partido)
+
+			if(!partido){
+				return res.status(400).json({msg: "Esse partido não existe"})
+			}
+
 			const user = await Politico.create({
 				cpf,
 				name,
@@ -36,7 +40,6 @@ class PoliticoController {
 				mandatoAtual
 			});
 
-			// RESPOSTA
 			return res
 				.status(201)
 				.json(user);
@@ -59,7 +62,7 @@ class PoliticoController {
 		try {
 			let {id} = req.params
 
-			const politico = await Politico.findOne({
+			let politico = await Politico.findOne({
 				where: {
 					cpf: id
 				}
@@ -69,17 +72,17 @@ class PoliticoController {
 			}
 			if (politico.id_partido) {
 				let partido = await Partido.findByPk(politico.id_partido)
-				politico.partido = partido;
+				console.log("politico ",politico)
 				if (!politico.mandatoAtual) {
 					return res
 						.status(200)
-						.json({politico})
+						.json({politico, partido})
 				} else {
 					let mandato = await Mandato.findByPk(politico.mandatoAtual)
-					politico.mandatoAtual = mandato
+					// politico.mandatoAtual = mandato
 					return res
 						.status(200)
-						.json({politico})
+						.json({politico, partido, mandato})
 				}
 			}
 
