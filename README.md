@@ -1,10 +1,10 @@
 <div align=center>
-  <h2>Trabalho rest-api de DS2</h2>
+  <h2>Trabalho rest-api de DS2 - Eleições</h2>
   <img src="https://istoe.com.br/wp-content/uploads/2020/12/73.jpg" style="width:320px;"/>
 </div>
 
 ## Description
-  **Simple REST API das eleições.**
+  **Simple REST API para cadastrar politicos.**
 ## Routes
  
 * Usuários 
