@@ -1,7 +1,5 @@
+const { Politico } = require('../politico/model');
 const {Mandato} = require('./model');
-const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
-const {hashPassword} = require('../utils/passoword.js');
 
 class MandatoController {
 
@@ -45,13 +43,18 @@ class MandatoController {
 
     async getById(req, res) {
         let {id} = req.params
-        const Mandato = await Mandato.findByPk(id)
-        if (!Mandato) {
-            throw {status: 400, message: "Mandato Not Found"}
+        let mandato = await Mandato.findByPk(id)
+        if (!mandato) {
+            throw {status: 400, message: "Mandato não encontrado"}
+        }else{
+            const politico = await Politico.findByPk(mandato.id_politico)
+            if(politico){
+                mandato.politico = politico
+            }
+            return res
+                .status(200)
+                .json({mandato, politico})
         }
-        return res
-            .status(200)
-            .json({Mandato})
     }
     async update(req, res) {
         const {id} = req.params;

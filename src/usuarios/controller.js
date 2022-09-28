@@ -1,7 +1,5 @@
 const {Usuario} = require('./model');
-const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-//const { hashPassword } = require('../utils/passoword.js');
 const {compare, hash, genSalt} = require('bcrypt')
 class UsuariosController {
 
@@ -116,7 +114,7 @@ class UsuariosController {
                 const hashedpass = await hash(senha, salt)
                 updateObj.password= hashedpass
             }
-            let response = await Usuario.update(updateObj, {where: {
+            await Usuario.update(updateObj, {where: {
                     id
                 }});
 

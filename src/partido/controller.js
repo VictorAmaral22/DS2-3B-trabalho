@@ -1,5 +1,6 @@
 const {Partido} = require("./model");
 const jwt = require("jsonwebtoken");
+const { Politico } = require("../politico/model");
 
 class PartidoController {
     constructor() {}
@@ -51,7 +52,35 @@ class PartidoController {
                 .json({error})
         }
     }
-
+    async getAllParticipantes(req,res) {
+        try {
+            let {id} = req.params;
+            id = parseFloat(id);
+            let partido = await Partido.findByPk(id);
+            if (!partido) {
+                return res
+                    .status(404)
+                    .json({msg: "Partido não encontrado"})
+            }
+            const politicos = await Politico.findAll({
+                where: {
+                 id_partido: id
+                }
+              });
+              if(politicos) {
+                return res
+                .status(200)
+                .json({partido, politicos});
+              }
+            return res
+                .status(200)
+                .json({partido});
+        } catch (error) {
+            return res
+                .status(400)
+                .json({error})
+        }
+    }
     async update(req, res) {
         try {
             const {id} = req.params;
