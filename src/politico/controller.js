@@ -93,6 +93,33 @@ class PoliticoController {
             return res.status(400).json({error})
         }
     }
+	
+	async getPoliticianHistory(req, res) {
+		try {
+			let {id} = req.params
+
+			let politico = await Politico.findOne({
+				where: {
+					cpf: id
+				}
+			})
+
+			if (!politico) {
+				return res.status(404).json({msg: "Político não encontrado"})
+			}
+			let mandatos = await Mandato.findAll({
+				where: {
+					id_politico: id
+				}
+			})
+
+			return res
+				.status(200)
+				.json({politico, mandatos})
+		} catch (error) {
+            return res.status(400).json({error})
+        }
+    }
 
     async update(req, res) {
         try {

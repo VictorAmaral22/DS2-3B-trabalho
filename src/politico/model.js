@@ -30,18 +30,16 @@ Politico.belongsTo(Partido, {
     onDelete: 'CASCADE'
 })
 
-Partido.hasMany(Politico, {
-    foreignKey: "numero",
-})
+// Partido.hasMany(Politico, {
+//     foreignKey: "id_partido"
+// })
 
 Mandato.belongsTo(Politico, {
     foreignKey: 'id_politico',
     onDelete: 'CASCADE'
 })
 
-Politico.hasMany(Mandato, {
-    foreignKey: 'cpf',
-})
+// Politico.hasMany(Mandato, {foreignKey: 'cpf'})
 
 sequelizeCon.sync();
 

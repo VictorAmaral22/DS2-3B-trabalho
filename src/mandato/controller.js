@@ -6,71 +6,108 @@ class MandatoController {
     constructor() {}
 
     async create(req, res) {
-        // INPUT
-        const {
-            id_politico,
-            numero,
-            cidade,
-            estado,
-            pais,
-            cargo,
-            inicio,
-            final
-        } = req.body;
-
-        // PROCESSAMENTO
-        const user = await Mandato.create({            
-            id_politico,
-            numero,
-            cidade,
-            estado,
-            pais,
-            cargo,
-            inicio,
-            final});
-
-        // RESPOSTA
-        return res
-            .status(201)
-            .json(user);
+        try {
+            // INPUT
+            const {
+                id_politico,
+                numero,
+                cidade,
+                estado,
+                pais,
+                cargo,
+                inicio,
+                final
+            } = req.body;
+    
+            // PROCESSAMENTO
+            const user = await Mandato.create({            
+                id_politico,
+                numero,
+                cidade,
+                estado,
+                pais,
+                cargo,
+                inicio,
+                final
+            });
+    
+            // RESPOSTA
+            return res
+                .status(201)
+                .json(user);
+        } catch (error) {
+            return res
+                .status(400)
+                .json({error});
+        }
 
     }
 
     async list(req, res) {
-        const mandatos = await Mandato.findAndCountAll();
-        res.json(mandatos);
+        try {
+            const mandatos = await Mandato.findAndCountAll();
+
+            res.status(200).json(mandatos);
+        } catch (error) {
+            return res
+                .status(400)
+                .json({error});
+        }
     }
 
     async getById(req, res) {
-        let {id} = req.params
-        let mandato = await Mandato.findByPk(id)
-        if (!mandato) {
-            throw {status: 400, message: "Mandato não encontrado"}
-        }else{
-            const politico = await Politico.findByPk(mandato.id_politico)
-            if(politico){
-                mandato.politico = politico
+        try {
+            let {id} = req.params
+            let mandato = await Mandato.findByPk(id)
+            
+            if (!mandato) {
+                throw {status: 400, message: "Mandato não encontrado"}
+            } else {
+                const politico = await Politico.findByPk(mandato.id_politico)
+                if(politico){
+                    mandato.politico = politico
+                }
+                return res
+                    .status(200)
+                    .json({mandato, politico})
             }
+        } catch (error) {
             return res
-                .status(200)
-                .json({mandato, politico})
+                .status(400)
+                .json({error});
         }
     }
+    
     async update(req, res) {
-        const {id} = req.params;
-        await Mandato.update(req.body, {where: {
-                id
-            }});
-        return res
-            .status(200)
-            .json({msg: "UPDATED"})
+        try {
+            const {id} = req.params;
+            await Mandato.update(req.body, {where: {
+                    id
+                }});
+            return res
+                .status(200)
+                .json({msg: "UPDATED"})
+        } catch (error) {
+            return res
+                .status(400)
+                .json({error});
+        }
+        
     }
+
     async delete(req, res) {
-        const {id} = req.params;
-        await Mandato.destroy({where: {
-                id
-            }});
-        res.json({message: 'DELETED'});
+        try {
+            const {id} = req.params;
+            await Mandato.destroy({where: {
+                    id
+                }});
+            res.json({message: 'DELETED'});
+        } catch (error) {
+            return res
+                .status(400)
+                .json({error});
+        }
+        
     }
 }
 
