@@ -84,6 +84,12 @@ class PartidoController {
     async update(req, res) {
         try {
             const {id} = req.params;
+            let partido = await Partido.findByPk(id);
+            if (!partido) {
+                return res
+                    .status(404)
+                    .json({msg: "Partido não encontrado"})
+            }
             const { name, logo } = req.body
             await Partido.update({ name, logo }, {where: {
                     numero: id
