@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended: true}));
 app.get('/', (req, res) => {
     return res.json({
         system: {
-            nome: "Vini",
+            nome: "Sohpoliticagem",
             version: '0.0.1-SNAPSHOT'
         }
     });

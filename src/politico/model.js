@@ -31,7 +31,7 @@ Politico.belongsTo(Partido, {
 })
 
 // Partido.hasMany(Politico, {
-//     foreignKey: "id_partido"
+
 // })
 
 Mandato.belongsTo(Politico, {
