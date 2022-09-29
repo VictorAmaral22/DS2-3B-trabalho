@@ -69,7 +69,6 @@
   * PUT     /politico 
   
         {
-          cpf: string?,
           name: string?,
           foto: string?,
           email: string?,
@@ -109,8 +108,7 @@
 
   * PUT     /partido/:numero 
  
-        {
-          numero:integer?,   
+        {   
           name:string?,
           logo:string?
         }
@@ -146,7 +144,6 @@
   * PUT     /mandato/:id_politico 
  
         {
-          id_politico:string?,
           numero:integer?,
           cidade:string?,
           estado:string?,
