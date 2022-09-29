@@ -60,9 +60,9 @@
   
   * GET     /politico 
   
-  * GET     /politico/:id 
+  * GET     /politico/:cpf 
 
-  * GET     /politico/:id/historico 
+  * GET     /politico/:cpf/historico 
   
   **Need Token in headers:{authorization:token}**
   
@@ -100,14 +100,14 @@
   * GET     /partido
   
   
-  * GET     /partido/:id
+  * GET     /partido/:numero
   
 
-  * GET     /partido/:id/integrantes
+  * GET     /partido/:numero/integrantes
   
   **Need Token in headers:{authorization:token}**
 
-  * PUT     /partido/:id 
+  * PUT     /partido/:numero 
  
         {
           numero:integer?,   
@@ -139,11 +139,11 @@
   * GET     /mandato
   
   
-  * GET     /mandato/:id
+  * GET     /mandato/:id_politico
   
   **Need Token in headers:{authorization:token}**
 
-  * PUT     /mandato/:id 
+  * PUT     /mandato/:id_politico 
  
         {
           id_politico:string?,
@@ -158,7 +158,7 @@
     
   **Need Token in headers:{authorization:token}**
   
-  * DELETE  /mandato/id_politico  
+  * DELETE  /mandato/:id_politico  
 
 
 ## How to run
