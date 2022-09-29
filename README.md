@@ -83,11 +83,7 @@
 
   **Need Token in headers:{authorization:token}**
 
-  * DELETE  /politico 
-  
-        {
-          cpf:string
-        }
+  * DELETE  /politico/:cpf
   
 * Partido
 
@@ -121,11 +117,7 @@
 
   **Need Token in headers:{authorization:token}**
 
-  * DELETE  /partido 
-  
-        {
-          numero:integer
-        }
+  * DELETE  /partido/:numero
 
 * Mandato
 
@@ -166,20 +158,14 @@
     
   **Need Token in headers:{authorization:token}**
   
-  * DELETE  /mandato 
-  
-        {
-          id_politico:string
-        }
+  * DELETE  /mandato/id_politico  
 
 
 ## How to run
 * Install Dependencies
 
         npm install
-* Run test
 
-        npm run test
 * Init Server
 
         npm run dev
