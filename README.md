@@ -60,16 +60,15 @@
   
   * GET     /politico 
   
-  * GET     /politico/:id 
+  * GET     /politico/:cpf 
 
-  * GET     /politico/:id/historico 
+  * GET     /politico/:cpf/historico 
   
   **Need Token in headers:{authorization:token}**
   
   * PUT     /politico 
   
         {
-          cpf: string?,
           name: string?,
           foto: string?,
           email: string?,
@@ -83,11 +82,7 @@
 
   **Need Token in headers:{authorization:token}**
 
-  * DELETE  /politico 
-  
-        {
-          cpf:string
-        }
+  * DELETE  /politico/:cpf
   
 * Partido
 
@@ -104,28 +99,23 @@
   * GET     /partido
   
   
-  * GET     /partido/:id
+  * GET     /partido/:numero
   
 
-  * GET     /partido/:id/integrantes
+  * GET     /partido/:numero/integrantes
   
   **Need Token in headers:{authorization:token}**
 
-  * PUT     /partido/:id 
+  * PUT     /partido/:numero 
  
-        {
-          numero:integer?,   
+        {   
           name:string?,
           logo:string?
         }
 
   **Need Token in headers:{authorization:token}**
 
-  * DELETE  /partido 
-  
-        {
-          numero:integer
-        }
+  * DELETE  /partido/:numero
 
 * Mandato
 
@@ -147,14 +137,13 @@
   * GET     /mandato
   
   
-  * GET     /mandato/:id
+  * GET     /mandato/:id_politico
   
   **Need Token in headers:{authorization:token}**
 
-  * PUT     /mandato/:id 
+  * PUT     /mandato/:id_politico 
  
         {
-          id_politico:string?,
           numero:integer?,
           cidade:string?,
           estado:string?,
@@ -166,20 +155,14 @@
     
   **Need Token in headers:{authorization:token}**
   
-  * DELETE  /mandato 
-  
-        {
-          id_politico:string
-        }
+  * DELETE  /mandato/:id_politico  
 
 
 ## How to run
 * Install Dependencies
 
         npm install
-* Run test
 
-        npm run test
 * Init Server
 
         npm run dev
